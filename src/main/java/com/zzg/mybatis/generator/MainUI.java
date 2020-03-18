@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.swing.*;
+import java.io.File;
 import java.net.URL;
 
 /**
@@ -36,6 +37,14 @@ public class MainUI extends Application {
 	}
 
 	public static void main(String[] args) {
+		//解决 java.lang.UnsatisfiedLinkError: C:\Users\luo_d\AppData\Local\Temp\sqlite-3.8.11.2-361a1aec-70b3-4143-953f-b29105263e11-sqlitejdbc.dll: 拒绝访问。
+		System.setProperty("java.io.tmpdir","D:/temp");
+		File tmp = new File(System.getProperty("java.io.tmpdir"));
+		if (!tmp.exists() || !tmp.isDirectory() || !tmp.canRead() || !tmp.canWrite()) {
+			System.out.println("error with tmpDir");
+			return;
+		}
+
 		launch(args);
 	}
 
